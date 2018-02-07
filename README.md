@@ -1,4 +1,4 @@
-# Alura - Ionic 2 course part 1: Mobile Hybrid Applications Even More Powerful
+# Alura - Ionic 2 course: Mobile Hybrid Applications Even More Powerful
 
 This is the code that I've developed following the course. I've made some changes in the original one.
 
@@ -58,3 +58,38 @@ This is the code that I've developed following the course. I've made some change
   - The DAO design pattern
   - Avoiding repeated scheduling
   - First Module Considerations
+
+### Side menu and scheduling page
+
+  - Sketching Schedules Page
+  - Application side menu
+  - Navigation from the menu
+  - Listing saved schedules
+
+### Resubmitting schedules
+
+  - Highlighting unsent schedules
+  - The forward button
+  - The forwarding logic
+
+### Login and Profile
+
+  - The login page
+  - Isolating login logic
+  - Accessing the Client API
+  - Saving the user logged in
+  - The profile page
+
+### Distribution through Ionic View
+
+  - Sharing our application through Ionic View
+
+### Native Resources
+
+  - Running the Direct App on Android
+  - Running the Direct Application on IOS
+  - Vibrating the device
+  - Accessing the camera
+  - Native input given
+  - Upgrading to IONIC3
+  - Final considerations

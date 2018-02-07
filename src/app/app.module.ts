@@ -9,6 +9,16 @@ import { AgendamentoService } from './../domain/agendamento/agendamento-service'
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
+import { Storage } from '@ionic/storage';
+import { AgendamentoDao } from './../domain/agendamento/agendamento-dao';
+
+function provideStorage() {
+  return new Storage(['indexeddb'], {
+    name: 'aluracar',
+    storeName: 'agendamentos'
+  });
+}
+
 @NgModule({
   declarations: [
     MyApp,
@@ -28,7 +38,9 @@ import 'rxjs/add/operator/toPromise';
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    AgendamentoService
+    AgendamentoService,
+    { provide: Storage, useFactory: provideStorage },
+    AgendamentoDao
   ]
 })
 export class AppModule { }

@@ -11,6 +11,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { Storage } from '@ionic/storage';
 import { AgendamentoDao } from './../domain/agendamento/agendamento-dao';
+import { AgendamentosPage } from './../pages/agendamentos/agendamentos';
 
 function provideStorage() {
   return new Storage(['indexeddb'], {
@@ -24,7 +25,8 @@ function provideStorage() {
     MyApp,
     HomePage,
     EscolhaPage,
-    CadastroPage
+    CadastroPage,
+    AgendamentosPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -34,7 +36,8 @@ function provideStorage() {
     MyApp,
     HomePage,
     EscolhaPage,
-    CadastroPage
+    CadastroPage,
+    AgendamentosPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

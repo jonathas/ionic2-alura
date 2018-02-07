@@ -55,6 +55,11 @@ export class CadastroPage {
           this.alerta.setSubTitle('Não foi possível realizar o agendamento. Tente mais tarde');
 
         this.alerta.present();
+      })
+      .catch(err => {
+        console.error(err);
+        this.alerta.setSubTitle(err.message);
+        this.alerta.present();
       });
   }
 

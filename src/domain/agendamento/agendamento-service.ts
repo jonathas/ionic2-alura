@@ -9,11 +9,15 @@ export class AgendamentoService {
 
   agenda(agendamento: Agendamento) {
     let url = `https://aluracar.herokuapp.com/salvarpedido?carro=${agendamento.carro.nome}&nome=${agendamento.nome}&preco=${agendamento.valor}&endereco=${agendamento.endereco}&email=${agendamento.email}&dataAgendamento=${agendamento.data}`;
-    return this.http.
-      get(url)
-      .toPromise()
-      .then(() => agendamento.confirmado = true, err => console.error(err))
-      .then(() => this.dao.salva(agendamento))
-      .then(() => agendamento.confirmado);
+
+    return this.dao.isAgendamentoDuplicado(agendamento).then(existe => {
+      if (existe) throw new Error('Esse agendamento já foi realizado');
+      return this.http.
+        get(url)
+        .toPromise()
+        .then(() => agendamento.confirmado = true, err => console.error(err))
+        .then(() => this.dao.salva(agendamento))
+        .then(() => agendamento.confirmado);
+    })
   }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { UsuarioService } from './../../domain/usuario/usuario-service';
 
 @Component({
   selector: 'page-perfil',
@@ -7,10 +8,13 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class PerfilPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private service: UsuarioService) { }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PerfilPage');
+  get usuarioLogado() {
+    return this.service.obtemUsuarioLogado();
   }
 
 }

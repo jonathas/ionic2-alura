@@ -1,4 +1,3 @@
-export interface Carro {
-  nome: string;
-  preco: number;
+export class Carro {
+  constructor(public nome: string, public preco: number) {}
 }

@@ -1,4 +1,3 @@
-export interface Acessorio {
-  nome: string;
-  preco: number;
+export class Acessorio {
+  constructor(public nome: string, public preco: number) { }
 }

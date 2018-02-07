@@ -1,6 +1,7 @@
 import { Agendamento } from './agendamento';
 import { Injectable } from "@angular/core";
 import { Storage } from '@ionic/storage';
+import { Carro } from './../carro/carro';
 
 @Injectable()
 export class AgendamentoDao {
@@ -17,6 +18,23 @@ export class AgendamentoDao {
 
   isAgendamentoDuplicado(agendamento: Agendamento) {
     return this.storage.get(this.getKey(agendamento)).then(dado => dado ? true : false);
+  }
+
+  listaTodos() {
+    let agendamentos = [];
+    return this.storage.forEach(dado => {
+      let carro = new Carro(dado.carro.nome, dado.carro.preco);
+      let agendamento = new Agendamento(
+        carro,
+        dado.valor,
+        dado.nome,
+        dado.endereco,
+        dado.email,
+        dado.data,
+        dado.confirmado);
+
+        agendamentos.push(agendamento);
+    }).then(() => agendamentos);
   }
 
 }

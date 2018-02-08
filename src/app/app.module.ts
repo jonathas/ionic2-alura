@@ -17,7 +17,7 @@ import { AgendamentoDao } from './../domain/agendamento/agendamento-dao';
 import { AgendamentosPage } from './../pages/agendamentos/agendamentos';
 
 function provideStorage() {
-  return new Storage(['indexeddb'], {
+  return new Storage(['indexeddb', 'sqlite'], {
     name: 'aluracar',
     storeName: 'agendamentos'
   });

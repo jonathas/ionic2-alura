@@ -17,12 +17,12 @@ export class HomePage implements OnInit {
     private http: Http,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController) {
-      this.http = http;
-      this.loadingCtrl = loadingCtrl;
-      this.alertCtrl = alertCtrl;
+    this.http = http;
+    this.loadingCtrl = loadingCtrl;
+    this.alertCtrl = alertCtrl;
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     let loader = this.loadingCtrl.create({
       content: 'Buscando novos carros. Aguarde ...'
     });
@@ -46,7 +46,7 @@ export class HomePage implements OnInit {
       });
   }
 
-  seleciona(carro) {
+  public seleciona(carro) {
     this.navCtrl.push(EscolhaPage, { carroSelecionado: carro });
   }
 

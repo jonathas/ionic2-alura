@@ -33,7 +33,7 @@ export class MyApp {
     });
   }
 
-  abrePagina(pagina) {
+  public abrePagina(pagina) {
     this.nav.push(pagina.componente);
   }
 

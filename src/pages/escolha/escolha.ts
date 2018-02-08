@@ -27,13 +27,13 @@ export class EscolhaPage {
     return this._precoTotal;
   }
 
-  atualizaTotal(ligado: boolean, acessorio: Acessorio) {
+  public atualizaTotal(ligado: boolean, acessorio: Acessorio) {
     ligado ?
       this._precoTotal += acessorio.preco :
       this._precoTotal -= acessorio.preco;
   }
 
-  avancaNoAgendamento() {
+  public avancaNoAgendamento() {
     this.navCtrl.push(CadastroPage, {
       carro: this.carro,
       precoTotal: this._precoTotal

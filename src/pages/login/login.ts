@@ -18,7 +18,7 @@ export class LoginPage {
     private service: UsuarioService,
     private alertCtrl: AlertController) { }
 
-  efetuaLogin() {
+  public efetuaLogin() {
     this.service.efetuaLogin(this.email, this.senha)
       .then(usuario => {
         console.log(usuario);

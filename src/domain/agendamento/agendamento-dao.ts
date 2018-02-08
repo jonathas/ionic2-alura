@@ -12,15 +12,15 @@ export class AgendamentoDao {
     return agendamento.email + agendamento.data.substr(0, 10);
   }
 
-  salva(agendamento: Agendamento) {
+  public salva(agendamento: Agendamento) {
     return this.storage.set(this.getKey(agendamento), agendamento);
   }
 
-  isAgendamentoDuplicado(agendamento: Agendamento) {
+  public isAgendamentoDuplicado(agendamento: Agendamento) {
     return this.storage.get(this.getKey(agendamento)).then(dado => dado ? true : false);
   }
 
-  listaTodos() {
+  public listaTodos() {
     let agendamentos = [];
     return this.storage.forEach(dado => {
       let carro = new Carro(dado.carro.nome, dado.carro.preco);
@@ -33,7 +33,7 @@ export class AgendamentoDao {
         dado.data,
         dado.confirmado);
 
-        agendamentos.push(agendamento);
+      agendamentos.push(agendamento);
     }).then(() => agendamentos);
   }
 

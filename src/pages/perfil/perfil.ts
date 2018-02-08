@@ -21,11 +21,11 @@ export class PerfilPage implements OnInit {
     return this.service.obtemUsuarioLogado();
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.url = this.service.obtemAvatar();
   }
 
-  tiraFoto() {
+  public tiraFoto() {
     this.camera.getPicture({
       destinationType: this.camera.DestinationType.FILE_URI,
       saveToPhotoAlbum: true,

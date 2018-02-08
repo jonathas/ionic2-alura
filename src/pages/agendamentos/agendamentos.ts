@@ -23,7 +23,7 @@ export class AgendamentosPage {
       .then(agendamentos => this.agendamentos = agendamentos);
   }
 
-  reenvia(agendamento: Agendamento) {
+  public reenvia(agendamento: Agendamento) {
     this.service.reagenda(agendamento)
       .then(confirmado => {
         confirmado

@@ -41,7 +41,7 @@ export class CadastroPage {
     console.log('ionViewDidLoad CadastroPage');
   }*/
 
-  agenda() {
+  public agenda() {
     if (!this.agendamento.nome || !this.agendamento.endereco || !this.agendamento.email) {
 
       this.vibration.vibrate(500);
@@ -71,7 +71,7 @@ export class CadastroPage {
       });
   }
 
-  selecionaData() {
+  public selecionaData() {
     this.datePicker.show({
       date: new Date(),
       mode: 'date'

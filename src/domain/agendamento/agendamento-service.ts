@@ -11,7 +11,7 @@ export class AgendamentoService {
     return `https://aluracar.herokuapp.com/salvarpedido?carro=${agendamento.carro.nome}&nome=${agendamento.nome}&preco=${agendamento.valor}&endereco=${agendamento.endereco}&email=${agendamento.email}&dataAgendamento=${agendamento.data}`;
   }
 
-  agenda(agendamento: Agendamento) {
+  public agenda(agendamento: Agendamento) {
     return this.dao.isAgendamentoDuplicado(agendamento).then(existe => {
       if (existe) throw new Error('Esse agendamento já foi realizado');
       return this.http.
@@ -23,7 +23,7 @@ export class AgendamentoService {
     });
   }
 
-  reagenda(agendamento: Agendamento) {
+  public reagenda(agendamento: Agendamento) {
     return this.http.
       get(this.montaUri(agendamento))
       .toPromise()

@@ -24,15 +24,15 @@ export class UsuarioService {
       });
   }
 
-  obtemUsuarioLogado() {
+  public obtemUsuarioLogado() {
     return this.usuarioLogado;
   }
 
-  guardaAvatar(url) {
+  public guardaAvatar(url) {
     localStorage.setItem(KEY, url);
   }
 
-  obtemAvatar() {
+  public obtemAvatar() {
     return localStorage.getItem(KEY);
   }
 

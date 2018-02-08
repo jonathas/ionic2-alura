@@ -4,6 +4,7 @@ import { NavController, NavParams, AlertController, Alert } from 'ionic-angular'
 import { Carro } from '../../domain/carro/carro';
 import { HomePage } from '../home/home';
 import { Agendamento } from '../../domain/agendamento/agendamento';
+import { Vibration } from 'ionic-native';
 
 @Component({
   templateUrl: 'cadastro.html'
@@ -39,11 +40,15 @@ export class CadastroPage {
 
   agenda() {
     if (!this.agendamento.nome || !this.agendamento.endereco || !this.agendamento.email) {
+
+      Vibration.vibrate(500);
+
       this.alertCtrl.create({
         title: 'Preenchimento obrigatório',
         subTitle: 'Você deve preencher todas as informações',
         buttons: [{ text: 'Ok' }]
       }).present();
+
       return;
     }
 

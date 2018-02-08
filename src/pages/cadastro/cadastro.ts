@@ -71,7 +71,7 @@ export class CadastroPage {
   selecionaData() {
     DatePicker.show({
       date: new Date(),
-      mode: 'data'
+      mode: 'date'
     }).then(data => this.agendamento.data = data.toISOString());
   }
 

@@ -8,9 +8,17 @@
 
 <ion-content padding>
     <ion-card>
+
         <ion-item>
-            <p>{{ usuarioLogado.nome }}</p>
+            <ion-avatar item-left *ngIf="url">
+                <img [src]="url">
+            </ion-avatar>
+            {{ usuarioLogado.nome }}
+            <button ion-button outline item-right (click)="tiraFoto()">
+                <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+            </button>
         </ion-item>
+
         <ion-item>
             <p>{{ usuarioLogado.dataNascimento }}</p>
         </ion-item>

@@ -4,7 +4,7 @@ import { NavController, NavParams, AlertController, Alert } from 'ionic-angular'
 import { Carro } from '../../domain/carro/carro';
 import { HomePage } from '../home/home';
 import { Agendamento } from '../../domain/agendamento/agendamento';
-import { Vibration } from 'ionic-native';
+import { Vibration, DatePicker } from 'ionic-native';
 
 @Component({
   templateUrl: 'cadastro.html'
@@ -66,6 +66,13 @@ export class CadastroPage {
         this.alerta.setSubTitle(err.message);
         this.alerta.present();
       });
+  }
+
+  selecionaData() {
+    DatePicker.show({
+      date: new Date(),
+      mode: 'data'
+    }).then(data => this.agendamento.data = data.toISOString());
   }
 
 }

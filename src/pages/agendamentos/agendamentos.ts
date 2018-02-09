@@ -23,21 +23,19 @@ export class AgendamentosPage {
       .then(agendamentos => this.agendamentos = agendamentos);
   }
 
-  public reenvia(agendamento: Agendamento) {
-    this.service.reagenda(agendamento)
-      .then(confirmado => {
-        confirmado
-          ? this.alertCtrl.create({
-            title: 'Envio',
-            subTitle: 'Agendamento reenviado com sucesso',
-            buttons: [{ text: 'Ok' }]
-          }).present()
-          : this.alertCtrl.create({
-            title: 'Envio',
-            subTitle: 'Não foi possível reenviar o agendamento. Tente outra vez',
-            buttons: [{ text: 'Ok' }]
-          }).present()
-      });
+  public async reenvia(agendamento: Agendamento) {
+    let confirmado = await this.service.reagenda(agendamento);
+    confirmado
+      ? this.createAlert('Agendamento reenviado com sucesso')
+      : this.createAlert('Não foi possível reenviar o agendamento. Tente outra vez');
+  }
+
+  private createAlert(subTitle: string) {
+    this.alertCtrl.create({
+      title: 'Envio',
+      subTitle: subTitle,
+      buttons: [{ text: 'Ok' }]
+    }).present();
   }
 
 }

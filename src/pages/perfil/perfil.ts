@@ -25,15 +25,19 @@ export class PerfilPage implements OnInit {
     this.url = this.service.obtemAvatar();
   }
 
-  public tiraFoto() {
-    this.camera.getPicture({
-      destinationType: this.camera.DestinationType.FILE_URI,
-      saveToPhotoAlbum: true,
-      correctOrientation: true
-    }).then(url => {
+  public async tiraFoto() {
+    try {
+      let url = await this.camera.getPicture({
+        destinationType: this.camera.DestinationType.FILE_URI,
+        saveToPhotoAlbum: true,
+        correctOrientation: true
+      });
+
       this.service.guardaAvatar(url);
       this.url = url;
-    }).catch(err => console.error(err));
+    } catch (err) {
+      console.error(err)
+    }
   }
 
 }

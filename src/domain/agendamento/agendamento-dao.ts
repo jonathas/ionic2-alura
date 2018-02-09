@@ -16,8 +16,9 @@ export class AgendamentoDao {
     return this.storage.set(this.getKey(agendamento), agendamento);
   }
 
-  public isAgendamentoDuplicado(agendamento: Agendamento) {
-    return this.storage.get(this.getKey(agendamento)).then(dado => dado ? true : false);
+  public async isAgendamentoDuplicado(agendamento: Agendamento) {
+    let dado = await this.storage.get(this.getKey(agendamento));
+    return dado ? true : false;
   }
 
   public listaTodos() {

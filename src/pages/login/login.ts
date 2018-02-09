@@ -18,20 +18,18 @@ export class LoginPage {
     private service: UsuarioService,
     private alertCtrl: AlertController) { }
 
-  public efetuaLogin() {
-    this.service.efetuaLogin(this.email, this.senha)
-      .then(usuario => {
-        console.log(usuario);
-        this.navCtrl.setRoot(HomePage);
-      })
-      .catch(err => {
-        this.alertCtrl.create({
-          title: 'Problema no login',
-          subTitle: 'Email ou senha inválidos. Verifique',
-          buttons: [{ text: 'Ok' }]
-        }).present();
-      });
-
+  public async efetuaLogin() {
+    try {
+      let usuario = await this.service.efetuaLogin(this.email, this.senha);
+      console.log(usuario);
+      this.navCtrl.setRoot(HomePage);
+    } catch (err) {
+      this.alertCtrl.create({
+        title: 'Problema no login',
+        subTitle: 'Email ou senha inválidos. Verifique',
+        buttons: [{ text: 'Ok' }]
+      }).present();
+    }
   }
 
 }

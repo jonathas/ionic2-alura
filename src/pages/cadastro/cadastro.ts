@@ -25,6 +25,7 @@ export class CadastroPage {
     private alertCtrl: AlertController,
     public vibration: Vibration,
     public datePicker: DatePicker) {
+
     this.carro = navParams.get('carro');
     this.precoTotal = navParams.get('precoTotal');
 
@@ -41,7 +42,27 @@ export class CadastroPage {
     console.log('ionViewDidLoad CadastroPage');
   }*/
 
-  public agenda() {
+  public async agenda() {
+    try {
+      if (!this.isValid()) {
+        return;
+      }
+
+      let confirmado = await this.service.agenda(this.agendamento)
+
+      confirmado ?
+        this.alerta.setSubTitle('Agendamento realizado com sucesso!') :
+        this.alerta.setSubTitle('Não foi possível realizar o agendamento. Tente mais tarde');
+
+      this.alerta.present();
+    } catch (err) {
+      console.error(err);
+      this.alerta.setSubTitle(err.message);
+      this.alerta.present();
+    }
+  }
+
+  private isValid() {
     if (!this.agendamento.nome || !this.agendamento.endereco || !this.agendamento.email) {
 
       this.vibration.vibrate(500);
@@ -52,30 +73,18 @@ export class CadastroPage {
         buttons: [{ text: 'Ok' }]
       }).present();
 
-      return;
+      return false;
     }
 
-    this.service
-      .agenda(this.agendamento)
-      .then(confirmado => {
-        confirmado ?
-          this.alerta.setSubTitle('Agendamento realizado com sucesso!') :
-          this.alerta.setSubTitle('Não foi possível realizar o agendamento. Tente mais tarde');
-
-        this.alerta.present();
-      })
-      .catch(err => {
-        console.error(err);
-        this.alerta.setSubTitle(err.message);
-        this.alerta.present();
-      });
+    return true;
   }
 
-  public selecionaData() {
-    this.datePicker.show({
+  public async selecionaData() {
+    let data = await this.datePicker.show({
       date: new Date(),
       mode: 'date'
-    }).then(data => this.agendamento.data = data.toISOString());
+    });
+    this.agendamento.data = data.toISOString();
   }
 
 }

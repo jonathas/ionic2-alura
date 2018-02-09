@@ -1,5 +1,7 @@
+import { Config } from '../../app/app.config';
 import { Component, OnInit } from '@angular/core';
 import { NavController, LoadingController, AlertController } from 'ionic-angular';
+import { Loading } from 'ionic-angular/components/loading/loading';
 import { Http } from '@angular/http';
 
 import { EscolhaPage } from '../escolha/escolha';
@@ -11,39 +13,41 @@ import { EscolhaPage } from '../escolha/escolha';
 export class HomePage implements OnInit {
 
   public carros;
+  private loader: Loading;
 
   constructor(
     public navCtrl: NavController,
     private http: Http,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController) {
-    this.http = http;
-    this.loadingCtrl = loadingCtrl;
-    this.alertCtrl = alertCtrl;
   }
 
   public ngOnInit(): void {
-    let loader = this.loadingCtrl.create({
+    this.loader = this.loadingCtrl.create({
       content: 'Buscando novos carros. Aguarde ...'
     });
 
-    loader.present();
+    this.loader.present();
+    this.getCarros();
+  }
 
-    this.http.get('https://aluracar.herokuapp.com/')
-      .map(res => res.json())
-      .toPromise()
-      .then(carros => {
-        this.carros = carros;
-        loader.dismiss();
-      }).catch(err => {
-        console.error(err);
-        loader.dismiss();
-        this.alertCtrl.create({
-          title: 'Falha na conexão',
-          buttons: [{ text: 'Estou ciente!' }],
-          subTitle: 'Não foi possível obter a lista de carros. Tente mais tarde.'
-        }).present();
-      });
+  private async getCarros() {
+    try {
+      this.carros = await this.http.get(Config.apiBase).map(res => res.json()).toPromise();
+      this.loader.dismiss();
+    } catch (err) {
+      console.error(err);
+      this.loader.dismiss();
+      this.createFailureAlert();
+    }
+  }
+
+  private createFailureAlert() {
+    this.alertCtrl.create({
+      title: 'Falha na conexão',
+      buttons: [{ text: 'Estou ciente!' }],
+      subTitle: 'Não foi possível obter a lista de carros. Tente mais tarde.'
+    }).present();
   }
 
   public seleciona(carro) {
